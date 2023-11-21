@@ -54,18 +54,26 @@ public class CtrSetCatalogoLibrosPanelFx  implements Initializable
 	@FXML
     void btnCambiarHyperlink_onClicked() throws IOException
     {
-		DirectoryChooser fc= new DirectoryChooser();
-		fc.setTitle("Seleccionar enlace");
-		
-		String wd=this.getClass().getClassLoader().getResource("").getPath();
-			
-		fc.setInitialDirectory(new File(wd));
-		
-		File dirBaseCatalogo=fc.showDialog(null);
-			
-		if(dirBaseCatalogo!=null)
+		try
 		{
-			hyDirBaseCatalogo.setText(dirBaseCatalogo.getAbsolutePath());
+			DirectoryChooser fc= new DirectoryChooser();
+			fc.setTitle("Seleccionar enlace");
+			
+			//String wd=this.getClass().getClassLoader().getResource("./").getPath();
+			String wd = System.getProperty("user.dir");
+				
+			fc.setInitialDirectory(new File(wd));
+			
+			File dirBaseCatalogo=fc.showDialog(null);
+			
+			if(dirBaseCatalogo!=null)
+			{
+				hyDirBaseCatalogo.setText(dirBaseCatalogo.getAbsolutePath());
+			}
+		}
+		catch(Exception ex)
+		{
+			// taDescripcion.setText(ex.getMessage()+ex.getStackTrace().toString());
 		}
     }
 	

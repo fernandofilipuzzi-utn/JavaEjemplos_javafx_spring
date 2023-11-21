@@ -77,7 +77,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 	@FXML
 	private Button btnFiltroContenido;
 	
-	
 	//
 	
 	@FXML
@@ -141,7 +140,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) 
 	{
-		
 		tvEntradas.setPlaceholder(new Label("Iniciar Captura."));
 		
 		TableColumn<Entrada, String> nombreCol = new TableColumn<>("Nombre");
@@ -201,85 +199,53 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 			}
 			
 		});
-			
 	}
 	Entrada selectedItem=null;
 	
-	
 	@FXML
     void miNuevo_onAction(ActionEvent event) throws IOException
-    {
-		/*
-		Stage stage = new Stage();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SetCatalogoLibrosPanelFx.fxml"));
-        Parent root = fxmlLoader.load();
-        CtrSetCatalogoLibrosPanelFx dialogController = fxmlLoader.<CtrSetCatalogoLibrosPanelFx>getController();
-        
-		Dialog dialog = new Dialog();
-		dialog.initOwner(stage);
-        dialog.setContentText("Hello world!");
-        dialog.setTitle("Last Dialog");
-        dialog.initModality(Modality.WINDOW_MODAL);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+    {		
+	    Stage dialog = new Stage();
 
-        dialog.showAndWait();
-        */
-		
-		MenuItem mi=(MenuItem) event.getSource();
-				
-		Stage dialog = new Stage();
-		
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SetCatalogoLibrosPanelFx.fxml"));
-        
-		Parent root = fxmlLoader.load();
-        
-        CtrSetCatalogoLibrosPanelFx dialogController = fxmlLoader.<CtrSetCatalogoLibrosPanelFx>getController();
-        
-        Scene scene = new Scene(root);
-        dialog.setScene(scene);
-        
-        scene.getStylesheets().add("/SetCatalogoLibrosPanelFx.css");
-              
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.sizeToScene();
-        dialog.setResizable(false);
-                
-        //stage.initOwner(((Node)event.getSource()).getScene().getWindow() );
-        
-        EditPropertyDialogController wizard = new EditPropertyDialogController();
-        
-        
-        dialog.setUserData(wizard);
-        
-        Stage stage = (Stage) scene.getWindow();
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			
-			@Override
-			public void handle(WindowEvent event) {
-				
-			}
-		});
-      
-        
-        
-        dialog.showAndWait();
-        
-        if(dialogController.result.equals("OK"))
-        {
-	        String docDirPath=dialogController.hyDirBaseCatalogo.getText();
-			
-			config.CrearNuevoCatalogo();
-			config.getCatalogo().setDocDirPath(docDirPath);
-        }
-        
+	    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/SetCatalogoLibrosPanelFx.fxml"));
+
+	    Parent root = fxmlLoader.load();
+
+	    CtrSetCatalogoLibrosPanelFx dialogController = fxmlLoader.<CtrSetCatalogoLibrosPanelFx>getController();
+
+	    Scene scene = new Scene(root);
+	    dialog.setScene(scene);
+
+	    scene.getStylesheets().add("/SetCatalogoLibrosPanelFx.css");
+
+	    dialog.initModality(Modality.APPLICATION_MODAL);
+	    dialog.sizeToScene();
+	    dialog.setResizable(false);
+
+	    Stage stage = (Stage) scene.getWindow();
+	    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+
+	        @Override
+	        public void handle(WindowEvent event) {
+
+	        }
+	    });
+
+	    dialog.showAndWait();
+
+	    if (dialogController.result.equals("OK")) {
+	        String docDirPath = dialogController.hyDirBaseCatalogo.getText();
+
+	        config.CrearNuevoCatalogo();
+	        config.getCatalogo().setDocDirPath(docDirPath);
+	    }
     }
 	
 	@FXML
     void miAbrir_onAction(ActionEvent event)
     {
 		MenuItem mi=(MenuItem) event.getSource();
-		
-	
+			
 		FileChooser fc = new FileChooser();
 		
 		fc.setTitle("Abrir fichero de catalogo.");
@@ -293,15 +259,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 			{
 				config.AbrirCatalogo(fileCatalogo);
 				config.setFileCatalog(fileCatalogo.getAbsolutePath());
-				
-				//
-				/*
-				for(Entrada en:config.getCatalogo().getEntradas())
-				{
-					//en.setNombre( fileCatalogo.getName() );
-					en.setUrl( "F:\\data\\workspaces\\workspace-biblioteca\\biblioteca\\book\\libros"+ fileCatalogo.separator + en.getNombre() );
-				}
-				*/
 			}
 			catch (ClassNotFoundException | IOException e) 
 			{
@@ -359,19 +316,15 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 				config.setFileCatalog(fileCatalogo.getAbsolutePath());
 			}
 		} 
-		catch (IOException e) 
+		catch (IOException ex) 
 		{
-			e.printStackTrace();
+			System.out.println( ex.toString()+ex.getMessage()+ex.getStackTrace().toString() );
 		}
     }
 		
 	@FXML
     void btnCambiarHyperlink_onMouseClicked()
     {		
-		
-		
-		
-		//if(selectedItem!=null)
 		if(tvEntradas.getSelectionModel().getSelectedItem()!=null)
 		{
 			FileChooser fc = new FileChooser();
@@ -396,14 +349,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 			}
 			
 			tvEntradas.refresh();
-			
-			/*
-			if(tvEntradaData!=null)
-			{
-				tvEntradaData.clear();
-				tvEntradaData.addAll(config.getCatalogo().getEntradas());
-			}
-			*/
 		}
     }
 		
@@ -421,13 +366,21 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 	@FXML
     void hyDoc_onMouseClicked()
     {
-		String docPath=config.getCatalogo().getDocDirPath() + "/" + selectedItem.getNombre();
-		
-		String cmds[] = new String[] {"cmd", "/c", docPath};
-		
 		try 
 		{
-		    Runtime.getRuntime().exec(cmds);
+			if(config.getCatalogo()!=null)
+			{
+				String docPath=config.getCatalogo().getDocDirPath() + "/" + selectedItem.getNombre();
+			
+				String cmds[] = new String[] {"cmd", "/c", docPath};
+			
+			
+			    Runtime.getRuntime().exec(cmds);
+			}
+			else
+			{
+				System.out.println("Error!");
+			}
 		} 
 		catch (IOException e) 
 		{
@@ -438,11 +391,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 	@FXML
     void btnConfirmar_onMouseClicked()
     {
-		
-		
-		//if(selectedItem!=null)
-		//{
-		
 		if(tvEntradas.getSelectionModel().getSelectedItem()!=null)
 		{
 			Entrada selectedItem=(Entrada)tvEntradas.getSelectionModel().getSelectedItem();
@@ -481,8 +429,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 			tfISBN10.clear();
 			tfISBN13.clear();
 			hyDoc.setText("");
-		
-			//selectedItem=null;
 			
 			tvEntradas.refresh();
 			
@@ -492,7 +438,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 				//tvEntradaData.clear();
 				tvEntradaData.remove(selectedItem);
 			}
-			
 		}
     }
 	
@@ -578,44 +523,6 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 		);
     }
 	
-	/*
-	@FXML
-    void btnFiltroParametros_onMouseClicked()
-    {
-		
-		FilteredList<Entrada> filteredList = new FilteredList<>(tvEntradaData);
-		tvEntradas.setItems(filteredList);
-		// to filter
-		filteredList.setPredicate(
-			    new Predicate<Entrada>(){
-			        public boolean test(Entrada t){
-			        	String frase=tfFiltroNombre.getText();
-			        	return t.getNombre().contains(frase);
-			        }
-			    }
-		);
-    }
-
-	
-	@FXML
-    void btnFiltroContenido_onMouseClicked()
-    {
-		FilteredList<Entrada> filteredList = new FilteredList<>(tvEntradaData);
-		tvEntradas.setItems(filteredList);
-
-		config.getCatalogo().BusquedaEnDocumentos(tfFiltroContenido.getText());
-		
-		// to filter
-		filteredList.setPredicate(
-			    new Predicate<Entrada>(){
-			        public boolean test(Entrada t){			        
-			        	return t.tieneCoincidencias();
-			        }
-			    }
-		);
-    }
-    */
-	
 	@FXML
     void miImportarEntradas_onAction(ActionEvent event) 
 	{
@@ -640,8 +547,7 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 			}
 		}		
 	}
-	
-	
+		
 	@FXML
     void miExportarEntradas_onAction(ActionEvent event) 
 	{
@@ -691,30 +597,4 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
         stage.setScene(scene);
         stage.showAndWait();		
     }
-	
-	
-	/*
-	Stage modalDialog = new Stage();
-    FXMLLoader loader = new FXMLLoader(getClass().getResource( "/SetCatalogoLibrosPanelFx.fxml" ));
-    Parent modalDialogRoot = loader.load();
-    Scene modalScene = new Scene( modalDialogRoot);
-    modalDialog.initModality(Modality.APPLICATION_MODAL); 
-   // modalScene.getStylesheets().add(InventoryManager.class.getResource("InventoryManager.css").toExternalForm());
-    modalDialog.initOwner(mi.getParentPopup().getScene().getWindow());
-    modalDialog.setScene(modalScene);
-    modalDialog.setResizable(false);
-    modalDialog.showAndWait();
-    */
-	/*
-    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/AyudaCatalogoLibrosPanelFx.fxml"));
-    Parent parent = fxmlLoader.load();
-    CtrSetCatalogoLibrosPanelFx dialogController = fxmlLoader.<CtrSetCatalogoLibrosPanelFx>getController();
-    //dialogController.setAppMainObservableList(tvObservableList);
-
-    Scene scene = new Scene(parent, 300, 200);
-    Stage stage = new Stage();
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.setScene(scene);
-    stage.showAndWait();
-    */
 }
