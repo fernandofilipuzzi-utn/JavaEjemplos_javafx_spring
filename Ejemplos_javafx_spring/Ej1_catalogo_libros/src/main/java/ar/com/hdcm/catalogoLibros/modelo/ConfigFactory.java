@@ -1,11 +1,14 @@
+/*
+ * autor: filipuzzi, fernando rafael
+ * versión: 20231121
+ **/
+
 package ar.com.hdcm.catalogoLibros.modelo;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;

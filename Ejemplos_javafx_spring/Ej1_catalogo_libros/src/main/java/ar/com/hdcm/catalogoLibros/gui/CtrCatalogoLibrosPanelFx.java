@@ -1,3 +1,8 @@
+/*
+ * autor: filipuzzi, fernando rafael
+ * versión: 20231121
+ **/
+
 package ar.com.hdcm.catalogoLibros.gui;
 
 import java.io.File;
@@ -370,8 +375,12 @@ public class CtrCatalogoLibrosPanelFx  implements Initializable
 		{
 			if(config.getCatalogo()!=null)
 			{
-				String docPath=config.getCatalogo().getDocDirPath() + "/" + selectedItem.getNombre();
-			
+				//String docPath=config.getCatalogo().getDocDirPath() + "/" + selectedItem.getNombre();
+				
+				String docPath=selectedItem.getUrl();
+				
+				System.out.println(docPath);
+				
 				String cmds[] = new String[] {"cmd", "/c", docPath};
 			
 			

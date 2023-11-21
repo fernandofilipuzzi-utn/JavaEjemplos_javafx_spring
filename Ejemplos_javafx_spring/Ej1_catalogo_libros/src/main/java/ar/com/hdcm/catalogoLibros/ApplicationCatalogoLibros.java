@@ -1,3 +1,8 @@
+/*
+ * autor: filipuzzi, fernando rafael
+ * versión: 20231121
+ **/
+
 package ar.com.hdcm.catalogoLibros;
 
 import java.io.IOException;
@@ -6,11 +11,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.sun.javafx.scene.control.skin.FXVK;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

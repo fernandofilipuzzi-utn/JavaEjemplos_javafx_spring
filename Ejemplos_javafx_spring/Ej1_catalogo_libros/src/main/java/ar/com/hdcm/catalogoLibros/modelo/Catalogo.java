@@ -1,13 +1,13 @@
+/*
+ * autor: filipuzzi, fernando rafael
+ * versión: 20231121
+ **/
+
 package ar.com.hdcm.catalogoLibros.modelo;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,7 @@ import org.apache.pdfbox.text.PDFTextStripper;
 public class Catalogo implements Serializable{
 	private static final long serialVersionUID = 1L;
 
-	String docDirPath="F:/data/workspaces/workspace-biblioteca/biblioteca/book/libros";
+	String docDirPath;
 	
 	boolean isRecursivo=true;
 	List<Entrada> entradas=new ArrayList<Entrada>();
@@ -29,7 +29,9 @@ public class Catalogo implements Serializable{
 	int directorios=0;
 	
 	public Catalogo ()
-	{}
+	{
+		docDirPath= System.getProperty("user.dir");
+	}
 	
 	public List<Entrada> ActualizarDocsFromDir()
 	{
@@ -74,13 +76,16 @@ public class Catalogo implements Serializable{
 		        	
 	            	String url=archivo.getAbsolutePath();
 	            	            	
-	            	Entrada entrada=new Entrada(nombre, mimeType, url);
-	            	
+	            	//creando la entrada del libro
+	            	Entrada entrada=new Entrada(nombre, mimeType, url);           	
+
 	            	Libro ficha=new Libro();
 	            	entrada.setFicha(ficha);
-	            	ficha.setTitulo(nombre.replaceAll("_", " ").replace(".pdf", ""));
 	            	
-	            	//Entrada buscado=BuscarEntradaPorUrl(url);
+	            	//catalogando con el nombre del fichero
+	            	ficha.setTitulo(nombre.replaceAll("_", " ").replace(".pdf", "").replace(".", " "));
+	            	
+	            	//buscando si existe
 	            	Entrada buscado=BuscarEntrada(entrada.getNombre());
 	            	
 	            	if(buscado==null)

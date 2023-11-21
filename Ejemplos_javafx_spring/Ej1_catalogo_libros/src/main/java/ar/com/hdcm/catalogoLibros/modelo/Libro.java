@@ -1,3 +1,8 @@
+/*
+ * autor: filipuzzi, fernando rafael
+ * versión: 20231121
+ **/
+
 package ar.com.hdcm.catalogoLibros.modelo;
 
 import java.io.Serializable;

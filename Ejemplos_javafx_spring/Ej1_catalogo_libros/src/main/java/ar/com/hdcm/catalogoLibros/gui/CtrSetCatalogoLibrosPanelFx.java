@@ -1,3 +1,8 @@
+/*
+ * autor: filipuzzi, fernando rafael
+ * versión: 20231121
+ **/
+
 package ar.com.hdcm.catalogoLibros.gui;
 
 import java.io.File;
@@ -9,17 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 
-import ar.com.hdcm.catalogoLibros.modelo.Entrada;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 @Controller
@@ -92,5 +94,4 @@ public class CtrSetCatalogoLibrosPanelFx  implements Initializable
 		Stage stage = (Stage) btnAceptar.getScene().getWindow();
 		stage.close();
     }
-	
 }
