@@ -1,0 +1,170 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+								http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ar.com.hdcm.catalogoLibros</groupId>
+	<artifactId>CatalogoLibros</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+  
+	<packaging>jar</packaging>
+  
+    <name>catalog_libros</name>
+	<url>http://maven.apache.org</url>
+   
+  	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.3.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+  
+  	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>https://repo.maven.apache.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+    
+	<dependencies>
+
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.apache.pdfbox</groupId>
+		    <artifactId>pdfbox</artifactId>
+		    <version>3.0.0-RC1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.5</version>
+		</dependency>
+		
+	</dependencies>
+  
+	<build>
+		
+			<sourceDirectory>src/main/java</sourceDirectory>
+			<resources>
+	     		<resource>
+	       			<directory>src/main/resources</directory>
+	       			<includes>
+	       				<include>*.fxml</include>
+	       				<include>*.css</include>
+	       				<include>img/</include>
+	       			</includes>
+	       			<excludes>
+          				<exclude>**/*desktop.ini</exclude>
+        			</excludes>
+	     		</resource>     		
+	     		<resource>
+	       			<directory>db</directory>
+	       			<excludes>
+          				<exclude>**/*desktop.ini</exclude>
+        			</excludes>
+	     		</resource>				
+	   		</resources>
+   		
+			<plugins>
+	
+				<plugin>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			
+				<plugin>
+				    <groupId>org.apache.maven.plugins</groupId>
+				    <artifactId>maven-dependency-plugin</artifactId>
+				    <executions>
+				        <execution>
+				            <id>copy-dependencies</id>
+				            <phase>prepare-package</phase>
+				            <goals>
+				                <goal>copy-dependencies</goal>
+				            </goals>
+				            <configuration>
+				                <outputDirectory>
+				                    ${project.build.directory}/libs
+				                </outputDirectory>
+				            </configuration>
+				        </execution>
+				    </executions>
+				</plugin>			
+				
+				<plugin>
+				    <groupId>org.springframework.boot</groupId>
+				    <artifactId>spring-boot-maven-plugin</artifactId>
+				    <executions>
+				        <execution>
+				            <goals>
+				                <goal>repackage</goal>
+				            </goals>
+				            <configuration>
+				                <classifier>spring-boot</classifier>
+				                <mainClass>
+									ar.com.hdcm.catalogoLibros.ApplicationCatalogoLibros
+				                </mainClass>
+				            </configuration>
+				        </execution>
+				    </executions>
+				</plugin>
+				
+				<!-- https://github.com/fvarrui/JavaPackager -->
+				<plugin>
+				    <groupId>io.github.fvarrui</groupId>
+				    <artifactId>javapackager</artifactId>
+				    <version>1.5.1</version>
+				    <executions>
+				        <execution>
+				            <phase>package</phase>
+				            <goals>
+				                <goal>package</goal>
+				            </goals>
+				            <configuration>
+				            	<name>CatalogoLibros</name>
+				            	<displayName>Catalogo de Libros</displayName>
+				                
+				                <!-- mandatory assetsDir-->
+				                <mainClass>ar.com.hdcm.catalogoLibros.ApplicationCatalogoLibros</mainClass>				                           
+				                <!-- optional  -Dcom.sun.javafx.touch=true -Xms1G -Xmx1G -->
+				                <bundleJre>true</bundleJre>
+				                <generateInstaller>false</generateInstaller>        
+				                <administratorRequired>false</administratorRequired>
+				                <platform>auto</platform>		
+				                <jrePath>C:\Program Files (x86)\Java\jre1.8.0_311</jrePath>
+				                <iconFile>favicon.ico</iconFile>	
+				                <copyDependencies>true</copyDependencies>          
+				                <vmArgs>
+   										-Xms1G -Xmx1G -Dcom.sun.javafx.isEmbedded=true 
+   								</vmArgs>
+   								
+   								<!-- carpeta adicional -->
+   								<additionalResources>info, ayuda</additionalResources>
+				            </configuration>
+				        </execution>
+				    </executions>
+				</plugin>
+						
+			</plugins>
+	</build>  
+</project>

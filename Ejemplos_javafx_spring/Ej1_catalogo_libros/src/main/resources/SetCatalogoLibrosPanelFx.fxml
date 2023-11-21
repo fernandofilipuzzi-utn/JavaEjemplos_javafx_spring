@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.*?>
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="467.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ar.com.hdcm.catalogoLibros.gui.CtrSetCatalogoLibrosPanelFx">
+   <bottom>
+      <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <items>
+          <Button fx:id="btnCerrar" mnemonicParsing="false" onAction="#btnCerrar_onAction" text="Cerrar" />
+            <Button fx:id="btnAceptar" mnemonicParsing="false" onAction="#btnAceptar_onAction" prefHeight="25.0" prefWidth="55.0" text="Aceptar" />
+        </items>
+      </ToolBar>
+   </bottom>
+   <center>
+      <Pane prefHeight="203.0" prefWidth="467.0" BorderPane.alignment="CENTER">
+         <children>
+            <Hyperlink fx:id="hyDirBaseCatalogo" layoutX="14.0" layoutY="175.0" onMouseClicked="#btnAceptar_onAction" prefHeight="42.0" prefWidth="378.0" text="Directorio base" />
+            <Label layoutX="30.0" layoutY="32.0" text="Nombre del Catalogo" />
+            <TextField fx:id="tfNombreCatalogo" layoutX="154.0" layoutY="28.0" prefHeight="25.0" prefWidth="274.0" promptText="Nombre del catalogo" />
+            <Button fx:id="btnCambiarHyperlink" layoutX="404.0" layoutY="175.0" mnemonicParsing="false" onMouseClicked="#btnCambiarHyperlink_onClicked" text="..." />
+            <TextArea fx:id="taDescripcion" layoutX="155.0" layoutY="64.0" prefHeight="103.0" prefWidth="273.0" promptText="Descripción del catalogo" />
+            <Label layoutX="30.0" layoutY="92.0" text="Descripción" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
