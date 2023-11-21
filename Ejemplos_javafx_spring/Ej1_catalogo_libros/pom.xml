@@ -10,7 +10,7 @@
   
 	<packaging>jar</packaging>
   
-    <name>catalog_libros</name>
+    <name>catalogo_libros</name>
 	<url>http://maven.apache.org</url>
    
   	<parent>
@@ -151,7 +151,7 @@
 				                <generateInstaller>false</generateInstaller>        
 				                <administratorRequired>false</administratorRequired>
 				                <platform>auto</platform>		
-				                <jrePath>C:\Program Files (x86)\Java\jre1.8.0_311</jrePath>
+				                <jrePath>C:\Program Files\Java\jre1.8.0_261</jrePath>
 				                <iconFile>favicon.ico</iconFile>	
 				                <copyDependencies>true</copyDependencies>          
 				                <vmArgs>
